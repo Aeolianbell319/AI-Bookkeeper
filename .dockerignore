@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+*.pyo
+data/
+.env
+.env.*
+.git/
+.gitignore
+.dockerignore
+README.md
+CLAUDE.md
+*.bat
+test_result.json
+.vscode/
+.idea/
+*.log
+*.tmp

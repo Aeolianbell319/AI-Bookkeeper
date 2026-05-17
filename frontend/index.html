@@ -119,7 +119,7 @@
   .msg.user { align-items: flex-end; margin-left: auto; }
   .bubble { padding: 0.6rem 0.85rem; font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
   .msg.bot .bubble {
-    background: #fff; border: 1.5px solid #E2CEB8;
+    background: #FFFBF5; border: 1.5px solid #E2CEB8;
     border-radius: 4px 16px 16px 16px; color: #4A3222;
     box-shadow: 2px 2px 0 rgba(200,160,120,0.1);
   }
@@ -295,10 +295,14 @@
   }
   .confirm-chip.sel { background: #F0A882; color: #fff; border-color: #E8886A; }
   .confirm-btn {
-    padding: 0.25rem 0.6rem; border-radius: 0.6rem; font-size: 0.72rem;
-    border: 1.5px solid #E2CEB8; cursor: pointer; background: #fff; color: #7A5E48;
+    padding: 0.35rem 0.7rem; border-radius: 0.8rem; font-size: 0.8rem;
+    border: 1.5px solid #E2CEB8; cursor: pointer;
+    background: linear-gradient(135deg, #FFF5EB, #FFEDE0); color: #7A5E48;
     font-family: inherit;
+    box-shadow: 2px 2px 0 rgba(200,160,120,0.1);
+    transition: transform 0.15s;
   }
+  .confirm-btn:active { transform: scale(0.97); }
   .confirm-btn.save { background: linear-gradient(135deg, #F0A882, #E8886A); color: #fff; border: none; }
   .confirm-date { font-size: 0.7rem; padding: 0.2rem 0.4rem; border: 1.5px dashed #D4B89C; border-radius: 0.5rem; background: #FFFBEB; color: #4A3222; font-family: inherit; }
 
@@ -317,10 +321,11 @@
   .goal-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, #F0A882, #7ECB7E); transition: width 0.5s; }
   .goal-hint { font-size: 0.76rem; color: #8A6E5A; margin-top: 0.3rem; }
   .btn {
-    display: block; width: 100%; padding: 0.6rem; border-radius: 0.6rem;
-    border: 1.5px solid #D4B89C; cursor: pointer;
-    font-size: 1rem; font-family: inherit;
-    background: #FFF5EB; color: #4A3222; margin-top: 0.5rem;
+    display: block; width: 100%; padding: 0.55rem; border-radius: 0.8rem;
+    border: 1.5px solid #E2CEB8; cursor: pointer;
+    font-size: 0.95rem; font-family: inherit;
+    background: linear-gradient(135deg, #FFF5EB, #FFEDE0); color: #7A5E48; margin-top: 0.5rem;
+    box-shadow: 2px 2px 0 rgba(200,160,120,0.1);
     transition: transform 0.15s;
   }
   .btn:active { transform: scale(0.97); }
@@ -330,6 +335,31 @@
     display: inline-block; padding: 0.15rem 0.5rem; border-radius: 0.4rem;
     font-size: 0.7rem; margin-right: 0.3rem;
   }
+
+  /* ===== Auth ===== */
+  .auth-overlay {
+    display: flex; position: absolute; inset: 0; background: #FFFCF7;
+    z-index: 30; align-items: center; justify-content: center; border-radius: 1rem;
+    flex-direction: column; padding: 2rem;
+  }
+  .auth-title { font-size: 2rem; font-family: 'ZCOOL KuaiLe', cursive; color: #4A3222; margin-bottom: 0.3rem; }
+  .auth-sub { font-size: 0.85rem; color: #B0896E; margin-bottom: 1.5rem; }
+  .auth-input {
+    width: 100%; max-width: 260px; padding: 0.6rem 0.7rem;
+    border: 1.5px solid #D4B89C; border-radius: 0.6rem; margin-bottom: 0.5rem;
+    font-size: 0.9rem; background: #FFFBEB; color: #4A3222; outline: none;
+    font-family: inherit;
+  }
+  .auth-btn {
+    width: 100%; max-width: 260px; padding: 0.6rem; border-radius: 0.6rem;
+    border: none; font-size: 0.95rem; font-family: inherit; cursor: pointer;
+    background: linear-gradient(135deg, #F0A882, #E8886A); color: #fff;
+    box-shadow: 2px 2px 0 rgba(200,160,120,0.15); margin-top: 0.4rem;
+    transition: transform 0.15s;
+  }
+  .auth-btn:active { transform: scale(0.97); }
+  .auth-switch { font-size: 0.82rem; color: #B0896E; margin-top: 1rem; cursor: pointer; }
+  .auth-error { font-size: 0.8rem; color: #E8886A; margin-bottom: 0.4rem; min-height: 1.2em; }
 
   /* ===== Manual Modal ===== */
   .modal-overlay {
@@ -365,53 +395,85 @@
   .chip.selected { background: #F0A882; color: #fff; border-color: #E8886A; }
   .modal-btn-row { display: flex; gap: 0.4rem; margin-top: 0.3rem; }
   .modal-btn-row button {
-    flex: 1; padding: 0.45rem; border-radius: 0.4rem;
-    border: 1.5px solid #D4B89C; cursor: pointer;
-    background: #FFF5EB; color: #4A3222; font-size: 0.9rem;
+    flex: 1; padding: 0.5rem; border-radius: 0.8rem;
+    border: 1.5px solid #E2CEB8; cursor: pointer;
+    background: linear-gradient(135deg, #FFF5EB, #FFEDE0); color: #7A5E48; font-size: 0.9rem;
     font-family: inherit;
+    box-shadow: 2px 2px 0 rgba(200,160,120,0.1);
+    transition: transform 0.15s;
   }
+  .modal-btn-row button:active { transform: scale(0.97); }
   .modal-btn-row button.primary { background: linear-gradient(135deg, #F0A882, #E8886A); color: #fff; border: none; }
 
   /* ===== Live2D 人偶 ===== */
   #live2d-stage { display: none; }
   #oml2d-tips, .oml2d-tips, [class*="oml2d-tips"] { display: none !important; }
   #oml2d-stage {
-    position: absolute !important; right: 5px !important; bottom: 0 !important;
+    position: absolute !important; right: 0px !important; bottom: 0 !important;
     left: auto !important; top: auto !important;
-    width: 140px !important; height: 320px !important; z-index: 1 !important;
+    width: 190px !important; height: 340px !important; z-index: 1 !important;
     pointer-events: auto; cursor: pointer;
+    clip-path: inset(35px 0 0 70px);
   }
 
   .mascot-bubble {
-    position: absolute; right: 100px; bottom: 60px; z-index: 21;
+    position: absolute; right: 140px; bottom: 255px; z-index: 21;
     background: #fff; border: 1.5px solid #E2CEB8;
     border-radius: 10px 10px 2px 10px;
     padding: 0.4rem 0.55rem; font-size: 0.72rem;
-    color: #4A3222; max-width: 180px;
+    color: #4A3222; max-width: 160px;
     box-shadow: 2px 2px 0 rgba(200,160,120,0.12);
     line-height: 1.5;
     opacity: 0; transform: translateY(6px);
-    transition: opacity 0.3s, transform 0.3s;
-    pointer-events: auto;
+    transition: opacity 0.5s, transform 0.4s;
+    pointer-events: none;
   }
-  .mascot-bubble.show { opacity: 1; transform: translateY(0); }
+  .mascot-bubble.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .mascot-bubble.fade-out { opacity: 0; transform: translateY(-4px); pointer-events: none; }
   .mascot-bubble::after {
-    content: ''; position: absolute; right: 10px; bottom: -6px;
+    content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%);
     width: 0; height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #fff;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 6px solid #fff;
   }
   .mascot-bubble-close {
     position: absolute; top: 1px; right: 5px;
     font-size: 0.6rem; color: #C4A88C; cursor: pointer;
     background: none; border: none; padding: 1px 3px;
   }
+  .mascot-dot {
+    position: absolute; right: 55px; bottom: 290px; z-index: 22;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #F0A830; border: 2px solid #fff;
+    box-shadow: 0 0 6px rgba(240,168,48,0.5);
+    cursor: pointer; opacity: 0; transform: scale(0);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .mascot-dot.show { opacity: 1; transform: scale(1); }
+  .mascot-dot.pulse { animation: dotPulse 1.5s ease-in-out infinite; }
+  @keyframes dotPulse {
+    0%, 100% { box-shadow: 0 0 4px rgba(240,168,48,0.4); }
+    50% { box-shadow: 0 0 12px rgba(240,168,48,0.8); }
+  }
 </style>
 </head>
 <body>
 
 <div class="phone">
+
+  <!-- 登录/注册 -->
+  <div class="auth-overlay" id="authOverlay">
+    <div class="auth-title">🌾 小满</div>
+    <div class="auth-sub" id="authSub">登录你的理财搭子</div>
+    <div class="auth-error" id="authError"></div>
+    <input class="auth-input" id="authUsername" placeholder="用户名" autocomplete="username">
+    <input class="auth-input" id="authPassword" type="password" placeholder="密码" autocomplete="current-password">
+    <input class="auth-input" id="authPassword2" type="password" placeholder="确认密码" style="display:none;" autocomplete="new-password">
+    <button class="auth-btn" id="authBtn" onclick="doAuth()">登 录</button>
+    <div class="auth-switch" id="authSwitch" onclick="toggleAuthMode()">没有账号？去注册 →</div>
+  </div>
+
   <!-- Top Bar -->
   <div class="topbar">
     <div class="avatar">🌾</div>
@@ -428,9 +490,9 @@
       <div class="home-greeting" id="homeGreeting">晚上好呀 ✨</div>
       <div class="home-sub" id="homeSub">小满陪你第 1 天</div>
       <div class="home-cards" id="homeCards"></div>
-      <div style="display:flex;gap:0.5rem;margin-top:0.8rem;">
-        <button class="home-add-btn" onclick="switchTab('chat')" style="flex:1;">💬 找小满记账</button>
-        <button class="home-add-btn" onclick="openManual()" style="flex:1;background:#FFF5EB;">✏️ 快速记一笔</button>
+      <div style="display:flex;gap:0.5rem;margin-top:0.8rem;margin-right:70px;">
+        <button class="home-add-btn" onclick="openGoalModal()" style="flex:1;font-size:0.85rem;padding:0.5rem 0.4rem;">🎯 设攒钱目标</button>
+        <button class="home-add-btn" onclick="openManual()" style="flex:1;background:#FFF5EB;font-size:0.85rem;padding:0.5rem 0.4rem;">✏️ 快速记一笔</button>
       </div>
     </div>
 
@@ -447,7 +509,7 @@
         <button class="chat-input-btn" onclick="openManual()" title="手动记账">✏️</button>
         <input id="chatInput" placeholder="说点什么，比如「午饭15」..." autofocus>
         <button class="chat-input-btn" id="voiceBtn" onmousedown="startVoice(event)" onmouseup="stopVoice()" onmouseleave="stopVoice()" ontouchstart="startVoice(event)" ontouchend="stopVoice()" oncontextmenu="return false" title="长按说话">🎤</button>
-        <button class="chat-send-btn" onclick="chatSend()">↑</button>
+        <button class="chat-send-btn" id="chatSendBtn" onclick="chatSend()">↑</button>
       </div>
     </div>
 
@@ -473,6 +535,7 @@
     <button class="mascot-bubble-close" onclick="dismissBubble()">×</button>
     <span id="mascotBubbleText"></span>
   </div>
+  <div class="mascot-dot pulse" id="mascotDot" onclick="showLastBubble()" title="小满有话说"></div>
 
   <!-- Modal -->
   <div class="modal-overlay" id="modal">
@@ -527,6 +590,21 @@
     </div>
   </div>
 
+  <!-- 攒钱目标对话框 -->
+  <div class="modal-overlay" id="goalModal">
+    <div class="modal-form">
+      <h3>🎯 设个攒钱目标</h3>
+      <div class="field-label">目标名称</div>
+      <input type="text" id="gName" placeholder="比如：买耳机、去旅行…" style="width:100%;padding:0.5rem 0.6rem;border:1.5px solid #D4B89C;border-radius:0.5rem;margin-bottom:0.5rem;font-size:0.9rem;background:#FFFBEB;color:#4A3222;outline:none;font-family:inherit;">
+      <div class="field-label">目标金额</div>
+      <input type="number" id="gAmount" placeholder="¥" step="0.01" min="0" inputmode="decimal" style="width:100%;padding:0.5rem 0.6rem;border:1.5px solid #D4B89C;border-radius:0.5rem;margin-bottom:0.5rem;font-size:0.9rem;background:#FFFBEB;color:#4A3222;outline:none;font-family:inherit;-moz-appearance:textfield;">
+      <div class="modal-btn-row">
+        <button onclick="closeGoalModal()">取消</button>
+        <button class="primary" onclick="submitGoal()">创建目标</button>
+      </div>
+    </div>
+  </div>
+
   <!-- 输入对话框 -->
   <div class="modal-overlay" id="promptModal">
     <div class="modal-form">
@@ -555,7 +633,7 @@
 (async function initLive2D() {
   try {
     await OML2D.loadOml2d({
-      models: [{ path: 'live2d/hiyori_pro_t11.model3.json', position: [0, 20], scale: 0.10, stageStyle: { width: 140, height: 320 } }],
+      models: [{ path: 'live2d/hiyori_pro_t11.model3.json', position: [0, 35], scale: 0.09, stageStyle: { width: 190, height: 340 } }],
       menus: { disable: true }, tips: { enable: false }, statusBar: { disable: true },
       dockedPosition: 'right', mobileDisplay: true,
     });
@@ -585,51 +663,98 @@ function setStartDate(v) { localStorage.setItem(START_KEY, v); }
 
 function daysSinceStart() { const s = new Date(getStartDate()); const n = new Date(); return Math.max(1, Math.floor((n-s)/86400000)+1); }
 
+const TOKEN_KEY = 'xiaoman_token';
+const USER_KEY = 'xiaoman_username';
+function getToken() { return localStorage.getItem(TOKEN_KEY) || ''; }
+function setToken(v) { localStorage.setItem(TOKEN_KEY, v); }
+function clearToken() { localStorage.removeItem(TOKEN_KEY); localStorage.removeItem(USER_KEY); }
+function getUsername() { return localStorage.getItem(USER_KEY) || '用户'; }
+function setUsername(v) { localStorage.setItem(USER_KEY, v); }
+
+function authHeaders() {
+  const t = getToken();
+  return t ? { 'Authorization': 'Bearer ' + t, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' };
+}
+
 // ==================== API 调用 ====================
 const API = {
-  async chat(messages, context) {
-    const r = await fetch('/api/chat', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({messages, context}) });
+  async chat(messages, context, signal) {
+    const r = await fetch('/api/chat', { method:'POST', headers:authHeaders(), body: JSON.stringify({messages, context}), signal });
     return r.json();
   },
   async confirmBill(amount, category, item, date) {
-    const r = await fetch('/api/bill/confirm', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({amount, category, item, date: date||today()}) });
+    const r = await fetch('/api/bill/confirm', { method:'POST', headers:authHeaders(), body: JSON.stringify({amount, category, item, date: date||today()}) });
     return r.json();
   },
   async manualBill(amount, category, item, date, type) {
-    const r = await fetch('/api/bill/manual', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({amount, category, item, date: date||today(), type: type||'expense'}) });
+    const r = await fetch('/api/bill/manual', { method:'POST', headers:authHeaders(), body: JSON.stringify({amount, category, item, date: date||today(), type: type||'expense'}) });
     return r.json();
   },
   async updateBill(id, amount, category, item, date) {
-    const r = await fetch('/api/bill/'+id, { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify({amount, category, item, date}) });
+    const r = await fetch('/api/bill/'+id, { method:'PUT', headers:authHeaders(), body: JSON.stringify({amount, category, item, date}) });
     return r.json();
   },
   async deleteBill(id) {
-    await fetch('/api/bill/'+id, { method:'DELETE' });
+    await fetch('/api/bill/'+id, { method:'DELETE', headers:authHeaders() });
   },
   async todayReport() {
-    const r = await fetch('/api/report/today'); return r.json();
+    const r = await fetch('/api/report/today', { headers:authHeaders() }); return r.json();
   },
   async weekReport() {
-    const r = await fetch('/api/report/week'); return r.json();
+    const r = await fetch('/api/report/week', { headers:authHeaders() }); return r.json();
   },
   async monthReport(budget) {
-    const r = await fetch('/api/report/month?budget='+(budget||0)); return r.json();
+    const r = await fetch('/api/report/month?budget='+(budget||0), { headers:authHeaders() }); return r.json();
   },
   async dateReport(date) {
-    const r = await fetch('/api/report/date/'+date); return r.json();
+    const r = await fetch('/api/report/date/'+date, { headers:authHeaders() }); return r.json();
   },
   async createGoal(name, target_amount) {
-    const r = await fetch('/api/goal', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name, target_amount}) });
+    const r = await fetch('/api/goal', { method:'POST', headers:authHeaders(), body: JSON.stringify({name, target_amount}) });
     return r.json();
   },
   async getGoal() {
-    const r = await fetch('/api/goal'); return r.json();
+    const r = await fetch('/api/goal', { headers:authHeaders() }); return r.json();
   },
-  async deleteGoal() {
-    await fetch('/api/goal', { method:'DELETE' });
+  async deleteGoal(goalId) {
+    await fetch('/api/goal?goal_id='+goalId, { method:'DELETE', headers:authHeaders() });
+  },
+  async dismissGoal(id) {
+    await fetch('/api/goal/'+id, { method:'DELETE', headers:authHeaders() });
+  },
+  async addGoalSavings(amount, goalId) {
+    let url = '/api/goal/add-savings?amount='+amount;
+    if (goalId) url += '&goal_id='+goalId;
+    const r = await fetch(url, { method:'POST', headers:authHeaders() });
+    return r.json();
   },
   async mascot(context) {
-    const r = await fetch('/api/mascot', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(context) });
+    const r = await fetch('/api/mascot', { method:'POST', headers:authHeaders(), body: JSON.stringify(context) });
+    return r.json();
+  },
+  async warmupMascot(context) {
+    const r = await fetch('/api/mascot/warmup', { method:'POST', headers:authHeaders(), body: JSON.stringify(context) });
+    return r.json();
+  },
+  async getMessages(limit) {
+    const r = await fetch('/api/messages?limit='+(limit||100), { headers:authHeaders() }); return r.json();
+  },
+  async saveMessages(msgs) {
+    await fetch('/api/messages', { method:'POST', headers:authHeaders(), body: JSON.stringify(msgs) });
+  },
+  async clearMessages() {
+    await fetch('/api/messages', { method:'DELETE', headers:authHeaders() });
+  },
+  async register(username, password) {
+    const r = await fetch('/api/auth/register', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({username, password}) });
+    return r.json();
+  },
+  async login(username, password) {
+    const r = await fetch('/api/auth/login', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({username, password}) });
+    return r.json();
+  },
+  async me() {
+    const r = await fetch('/api/auth/me', { headers:authHeaders() });
     return r.json();
   },
 };
@@ -641,47 +766,119 @@ let currentPage = 'home';
 
 // ==================== 碎碎念气泡 ====================
 let bubbleTimer = null;
+let fadeTimer = null;
 let bubbleCooldown = {};
+let lastBubbleMsg = '';
 
 function showBubble(msg) {
   const b = document.getElementById('mascotBubble');
   const t = document.getElementById('mascotBubbleText');
+  const dot = document.getElementById('mascotDot');
   if (!b || !t || !msg) return;
   if (bubbleTimer) clearTimeout(bubbleTimer);
+  if (fadeTimer) clearTimeout(fadeTimer);
+  // 隐藏黄点
+  if (dot) { dot.classList.remove('show', 'pulse'); }
+  // 移除旧状态
+  b.classList.remove('fade-out');
   t.textContent = msg;
   b.classList.add('show');
+  lastBubbleMsg = msg;
   mascotHistory.push({ said: msg, time: new Date().toISOString() });
-  bubbleTimer = setTimeout(() => b.classList.remove('show'), 5000);
+  // 4秒后开始淡出
+  fadeTimer = setTimeout(() => {
+    b.classList.add('fade-out');
+    b.classList.remove('show');
+    // 淡出动画结束后显示黄点
+    bubbleTimer = setTimeout(() => {
+      b.classList.remove('fade-out');
+      if (dot) { dot.classList.add('show', 'pulse'); }
+    }, 500);
+  }, 4000);
+}
+
+function showLastBubble() {
+  if (lastBubbleMsg) showBubble(lastBubbleMsg);
 }
 
 function dismissBubble() {
   const b = document.getElementById('mascotBubble');
-  if (b) b.classList.remove('show');
+  const dot = document.getElementById('mascotDot');
+  if (b) { b.classList.remove('show', 'fade-out'); }
+  if (dot) { dot.classList.remove('show', 'pulse'); }
   if (bubbleTimer) clearTimeout(bubbleTimer);
+  if (fadeTimer) clearTimeout(fadeTimer);
+}
+
+let mascotCache = {};      // { home: "..", stats: "..", bills: "..", me: ".." }
+let warmupPending = null;
+
+async function warmupMascotCache() {
+  if (warmupPending) return warmupPending;
+
+  warmupPending = (async () => {
+    let todayData = { total:0, breakdown:[] };
+    let weekData = { total:0, count:0 };
+    let goalData = null;
+    try {
+      const [td, wd, gd] = await Promise.all([API.todayReport(), API.weekReport(), API.getGoal()]);
+      todayData = td; weekData = wd; goalData = gd.goals || null;
+    } catch(e) { console.warn('warmup: 报表拉取失败', e); }
+
+    try {
+      const results = await API.warmupMascot({
+        user_profile: { budget: getBudget(), goal: goalData, days_since_last_bill: todayData.breakdown.length > 0 ? 0 : 2 },
+        current_data: { today_spent: todayData.total, week_spent: weekData.total, count: weekData.count },
+        mascot_history: mascotHistory.slice(-10),
+        current_page: 'home',
+        trigger: 'warmup',
+      });
+      console.log('warmup 返回:', results);
+      if (results) {
+        ['home','stats','bills','me'].forEach(p => {
+          if (results[p] && results[p].trim()) mascotCache[p] = results[p];
+        });
+      }
+      console.log('mascotCache:', mascotCache);
+    } catch(e) { console.warn('warmup API 失败:', e); }
+    warmupPending = null;
+  })();
+
+  return warmupPending;
 }
 
 async function updateMascot(page, trigger) {
-  if (page === 'chat') { dismissBubble(); return; }
+  // 对话页不弹气泡（小满隐藏了）
+  if (currentPage === 'chat') { dismissBubble(); return; }
+
   const now = Date.now();
-  if (bubbleCooldown[page] && (now - bubbleCooldown[page]) < 30000) return;
-  bubbleCooldown[page] = now;
+  const cooled = !bubbleCooldown['_global'] || (now - bubbleCooldown['_global']) >= 10000;
+  if (!cooled) return;
 
-  let todayData = { total:0, breakdown:[] };
-  let weekData = { total:0, count:0 };
-  let goalData = null;
+  bubbleCooldown['_global'] = now;
+
+  // 缓存命中 → 秒弹
+  if (mascotCache[page]) {
+    showBubble(mascotCache[page]);
+    delete mascotCache[page];
+    if (Object.keys(mascotCache).length <= 2) warmupMascotCache();
+    return;
+  }
+
+  // 缓存未命中 → 等预热（最多 4 秒），拿不到就算了
   try {
-    const [td, wd, gd] = await Promise.all([API.todayReport(), API.weekReport(), API.getGoal()]);
-    todayData = td; weekData = wd; goalData = gd.goal;
-  } catch(e) { return; }
+    await Promise.race([
+      warmupMascotCache(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 4000)),
+    ]);
+  } catch(e) {}
 
-  const resp = await API.mascot({
-    user_profile: { budget: getBudget(), goal: goalData, days_since_last_bill: todayData.breakdown.length > 0 ? 0 : 2 },
-    current_data: { today_spent: todayData.total, week_spent: weekData.total, count: weekData.count },
-    mascot_history: mascotHistory.slice(-10),
-    current_page: page,
-    trigger: trigger || 'tab_switch',
-  });
-  if (resp.text) showBubble(resp.text);
+  if (mascotCache[page]) {
+    showBubble(mascotCache[page]);
+    delete mascotCache[page];
+    if (Object.keys(mascotCache).length <= 2) warmupMascotCache();
+  }
+  // 没拿到 → 不弹，小满这次没话说
 }
 
 // ==================== Tab 切换 ====================
@@ -698,9 +895,21 @@ document.querySelectorAll('.tab-item').forEach(btn => {
     if (page==='bills') refreshBills();
     if (page==='me') refreshMe();
     if (page==='chat') scrollChatBottom();
+    toggleLive2D(page);
     updateMascot(page, 'tab_switch');
   });
 });
+
+function toggleLive2D(page) {
+  const stage = document.getElementById('oml2d-stage');
+  const bubble = document.getElementById('mascotBubble');
+  if (page === 'chat') {
+    if (stage) { stage.style.visibility = 'hidden'; stage.style.pointerEvents = 'none'; }
+    if (bubble) bubble.classList.remove('show');
+  } else {
+    if (stage) { stage.style.visibility = ''; stage.style.pointerEvents = ''; }
+  }
+}
 
 function switchTab(page) {
   document.querySelectorAll('.tab-item').forEach(b=>b.classList.remove('active'));
@@ -713,6 +922,7 @@ function switchTab(page) {
   if (page==='stats') refreshStats();
   if (page==='bills') refreshBills();
   if (page==='me') refreshMe();
+  toggleLive2D(page);
   updateMascot(page, 'tab_switch');
 }
 
@@ -725,22 +935,22 @@ async function refreshHome() {
   const bills = todayData.breakdown;
   const t = todayData.total;
   const weekTotal = weekData.total;
-  const goal = goalResp.goal;
+  const goals = goalResp.goals || [];
+  const activeGoals = goals.filter(g => !g.completed);
 
   const catE = {餐饮:'🍚',交通:'🚌',购物:'🛍️',娱乐:'🎮',医疗:'🏥',社交:'🎁',学习:'📚',通讯:'📱',杂项:'🔧',其他:'📦'};
   let cards = '';
 
-  // 卡片1: 今日消费
+  // 卡片1: 今日消费 — 按金额降序取前5条
+  const topBills = bills.sort((a, b) => b.amount - a.amount).slice(0, 5);
   if (bills.length > 0) {
-    let rows = bills.slice(0,5).map(b => {
-      const emoji = b.type==='income'?'💚':(catE[b.category]||'💰');
-      const sign = b.type==='income'?'+':'-';
-      const amtColor = b.type==='income'?'#7ECB7E':'#E8886A';
-      return `<div style="display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;color:#7A5E48;margin-top:0.2rem;padding:0.2rem 0.4rem;background:rgba(226,206,184,0.15);border-radius:0.5rem;"><span>${emoji}${b.item||b.category}</span><span style="font-weight:600;color:${amtColor};">${sign}¥${b.amount.toFixed(0)}</span><button onclick="event.stopPropagation();editBill(${b.id})" style="background:none;border:none;cursor:pointer;font-size:0.7rem;color:#E8886A;padding:0.15rem 0.35rem;border-radius:0.3rem;margin-left:0.3rem;" title="编辑">✎</button><button onclick="event.stopPropagation();deleteBill(${b.id})" style="background:none;border:none;cursor:pointer;font-size:0.8rem;color:#D47860;padding:0.1rem 0.35rem;border-radius:0.3rem;margin-left:0.15rem;" title="删除">×</button></div>`;
+    let rows = topBills.map(b => {
+      const emoji = catE[b.category] || '💰';
+      return `<div style="display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;color:#7A5E48;margin-top:0.2rem;padding:0.2rem 0.4rem;background:rgba(226,206,184,0.15);border-radius:0.5rem;"><span>${emoji}${b.category}</span><span style="font-weight:600;color:#E8886A;">-¥${b.amount.toFixed(0)}</span><button onclick="event.stopPropagation();editBill(${b.id},${b.amount},'${b.category}','${(b.item||'').replace(/'/g,"\\'")}','${b.date}','${b.type}')" style="background:none;border:none;cursor:pointer;font-size:0.7rem;color:#E8886A;padding:0.15rem 0.35rem;border-radius:0.3rem;margin-left:0.3rem;" title="编辑">✎</button><button onclick="event.stopPropagation();deleteBill(${b.id})" style="background:none;border:none;cursor:pointer;font-size:0.8rem;color:#D47860;padding:0.1rem 0.35rem;border-radius:0.3rem;margin-left:0.15rem;" title="删除">×</button></div>`;
     }).join('');
-    cards += `<div class="home-card" onclick="switchTab('chat')"><div class="home-card-header"><span class="home-card-title">今日消费</span><span class="home-card-icon">📰</span></div><div class="home-card-big">¥${Math.abs(t).toFixed(0)}</div>${rows}<div class="home-card-detail">${Math.abs(t)>80?'今天有点猛，明天悠着点~':Math.abs(t)>30?'节奏还行👌':'很克制！表现不错✨'}</div></div>`;
+    cards += `<div class="home-card" onclick="switchTab('bills')"><div class="home-card-header"><span class="home-card-title">今日消费</span><span class="home-card-icon">📰</span></div><div class="home-card-big">¥${Math.abs(t).toFixed(0)}</div>${rows}<div class="home-card-detail">${Math.abs(t)>80?'今天有点猛，明天悠着点~':Math.abs(t)>30?'节奏还行👌':'很克制！表现不错✨'}</div></div>`;
   } else {
-    cards += `<div class="home-card" onclick="switchTab('chat')"><div class="home-card-header"><span class="home-card-title">今日消费</span><span class="home-card-icon">📰</span></div><div class="home-card-big">¥0</div><div class="home-card-detail">今天还没有消费记录~ 去跟小满说一声？</div></div>`;
+    cards += `<div class="home-card" onclick="switchTab('bills')"><div class="home-card-header"><span class="home-card-title">今日消费</span><span class="home-card-icon">📰</span></div><div class="home-card-big">¥0</div><div class="home-card-detail">今天还没有消费记录~ 去跟小满说一声？</div></div>`;
   }
 
   // 卡片2: 本周汇总
@@ -751,13 +961,19 @@ async function refreshHome() {
   }
 
   // 卡片3: 攒钱目标
-  if (goal && !goal.completed) {
-    const pct = Math.min(100, Math.round(goal.saved_amount/goal.target_amount*100));
-    cards += `<div class="home-card" onclick="switchTab('me')"><div class="home-card-header"><span class="home-card-title">攒钱目标</span><span class="home-card-icon">🎯</span></div><div style="display:flex;align-items:center;gap:0.6rem;"><span style="font-size:1.8rem;">🎯</span><div style="flex:1;min-width:0;"><div style="font-size:0.82rem;font-weight:600;color:#4A3222;">${escapeHtml(goal.name)}</div><div style="height:8px;background:#F0E4D8;border-radius:4px;margin-top:0.3rem;"><div style="height:100%;width:${pct}%;background:linear-gradient(90deg,#F0A882,#7ECB7E);border-radius:4px;"></div></div><div style="font-size:0.7rem;color:#B0896E;margin-top:0.2rem;">¥${goal.saved_amount.toFixed(0)} / ¥${goal.target_amount} (${pct}%)</div></div></div><div class="home-card-detail">还差 ¥${(goal.target_amount-goal.saved_amount).toFixed(0)} · 继续加油 💪</div></div>`;
-  } else if (goal && goal.completed) {
-    cards += `<div class="home-card" onclick="switchTab('me')"><div class="home-card-header"><span class="home-card-title">攒钱目标</span><span class="home-card-icon">🎉</span></div><div class="home-card-big">已达成！</div><div class="home-card-detail">「${escapeHtml(goal.name)}」¥${goal.saved_amount.toFixed(0)} 太厉害了！</div></div>`;
+  if (activeGoals.length > 0) {
+    let goalCards = '';
+    activeGoals.forEach(g => {
+      const pct = Math.min(100, Math.round(g.saved_amount/g.target_amount*100));
+      goalCards += `<div style="padding:0.5rem 0;border-bottom:1px solid #F0E4D8;" onclick="event.stopPropagation();"><div style="font-size:0.82rem;font-weight:600;color:#4A3222;margin-bottom:0.3rem;">🎯 ${escapeHtml(g.name)}</div><div style="height:6px;background:#F0E4D8;border-radius:3px;"><div style="height:100%;width:${pct}%;background:linear-gradient(90deg,#F0A882,#7ECB7E);border-radius:3px;"></div></div><div style="display:flex;justify-content:space-between;font-size:0.68rem;color:#B0896E;margin-top:0.15rem;"><span>¥${g.saved_amount.toFixed(0)} / ¥${g.target_amount}</span><span>${pct}%</span></div><div style="display:flex;gap:0.3rem;margin-top:0.4rem;padding-right:0.5rem;"><input id="homeSave_${g.id}" type="number" placeholder="攒一笔" step="1" min="0" inputmode="numeric" style="width:70px;border:1.5px solid #D4B89C;border-radius:0.4rem;padding:0.25rem 0.4rem;font-size:0.72rem;background:#FFFBEB;color:#4A3222;outline:none;font-family:inherit;-moz-appearance:textfield;flex-shrink:0;"><button onclick="addHomeSavings(${g.id})" style="padding:0.25rem 0.5rem;border-radius:0.4rem;border:1.5px solid #E2CEB8;background:linear-gradient(135deg,#FFF5EB,#FFEDE0);color:#7A5E48;font-size:0.72rem;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;">💰 攒了</button><button onclick="deleteGoal(${g.id})" style="padding:0.25rem 0.5rem;border-radius:0.4rem;border:1.5px solid #E8D5C0;background:linear-gradient(135deg,#FFF5EB,#FFEDE0);color:#C4A08A;font-size:0.72rem;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;">放弃</button></div></div>`;
+    });
+    cards += `<div class="home-card" onclick="switchTab('me')"><div class="home-card-header"><span class="home-card-title">攒钱目标</span><span class="home-card-icon">🎯</span><span style="font-size:0.7rem;color:#B0896E;">${activeGoals.length}个进行中</span></div>${goalCards}</div>`;
+  } else if (goals.length > 0) {
+    // 全部已完成
+    const g = goals[0];
+    cards += `<div class="home-card" onclick="switchTab('me')"><div class="home-card-header"><span class="home-card-title">攒钱目标</span><span class="home-card-icon">🎉</span></div><div class="home-card-big" style="color:#7ECB7E;">已达成！</div><div class="home-card-detail">「${escapeHtml(g.name)}」¥${g.saved_amount.toFixed(0)} 🎊</div><button onclick="event.stopPropagation();dismissAndRefresh(${g.id})" style="margin-top:0.5rem;padding:0.3rem 0.8rem;border-radius:0.6rem;border:1.5px solid #7ECB7E;background:#E8F5E0;color:#5A8A4A;cursor:pointer;font-size:0.8rem;font-family:inherit;">✅ 完成，开始新目标</button></div>`;
   } else {
-    cards += `<div class="home-card" onclick="switchTab('chat'); setTimeout(()=>chatQuick('想攒300买耳机'),300);"><div class="home-card-header"><span class="home-card-title">攒钱目标</span><span class="home-card-icon">🎯</span></div><div class="home-card-big" style="color:#C4A88C;">还没有目标</div><div class="home-card-detail">点这里去跟小满定一个攒钱目标吧~</div></div>`;
+    cards += `<div class="home-card" onclick="switchTab('chat')"><div class="home-card-header"><span class="home-card-title">攒钱目标</span><span class="home-card-icon">🎯</span></div><div class="home-card-big" style="color:#C4A88C;">还没有目标</div><div class="home-card-detail">点这里去跟小满定一个攒钱目标吧~</div></div>`;
   }
 
   document.getElementById('homeCards').innerHTML = cards || '<div class="home-empty">🏠 加载中...</div>';
@@ -778,6 +994,22 @@ function addChatMsg(role, text, time) {
   scrollChatBottom();
 }
 
+let chatAbortController = null;
+let isProcessing = false;
+
+function setChatBusy(busy) {
+  isProcessing = busy;
+  const btn = document.getElementById('chatSendBtn');
+  const input = document.getElementById('chatInput');
+  if (busy) {
+    if (btn) { btn.textContent = '■'; btn.style.background = '#E8886A'; }
+    if (input) { input.disabled = true; input.placeholder = '小满正在思考...'; }
+  } else {
+    if (btn) { btn.textContent = '↑'; btn.style.background = ''; }
+    if (input) { input.disabled = false; input.placeholder = '说点什么，比如「午饭15」...'; }
+  }
+}
+
 function showChatTyping() {
   const d = document.createElement('div'); d.className='msg bot'; d.id='typing';
   d.innerHTML='<div class="bubble typing-dots"><span></span><span></span><span></span></div>';
@@ -786,19 +1018,31 @@ function showChatTyping() {
 function hideChatTyping() { const t=document.getElementById('typing'); if(t)t.remove(); }
 
 function chatSend() {
+  if (isProcessing) {
+    // 暂停：中止请求
+    if (chatAbortController) { chatAbortController.abort(); chatAbortController = null; }
+    hideChatTyping();
+    addChatMsg('bot', '已停止生成');
+    setChatBusy(false);
+    return;
+  }
   const text = chatInput.value.trim();
   if (!text) return;
   chatInput.value = '';
   processChat(text);
 }
 
-function chatQuick(text) { processChat(text); }
+function chatQuick(text) {
+  if (isProcessing) return;
+  processChat(text);
+}
 
 async function processChat(text) {
   addChatMsg('user', escapeHtml(text));
   chatMessages.push({ role: 'user', content: text });
 
   showChatTyping();
+  setChatBusy(true);
 
   let context = null;
   try {
@@ -806,66 +1050,127 @@ async function processChat(text) {
     context = {
       today_bills: td.breakdown,
       today_total: td.total,
-      goal: gd.goal,
+      goals: gd.goals,
       budget: getBudget(),
-      is_new_user: td.breakdown.length === 0 && !gd.goal && !getBudget(),
+      is_new_user: td.breakdown.length === 0 && (!gd.goals || gd.goals.length === 0) && !getBudget(),
     };
   } catch(e) {}
 
+  chatAbortController = new AbortController();
   try {
-    const resp = await API.chat(chatMessages, context);
+    const resp = await API.chat(chatMessages, context, chatAbortController.signal);
     hideChatTyping();
 
     let replyHtml = escapeHtml(resp.reply).replace(/\n/g, '<br>');
 
-    // 如果检测到消费，显示确认卡片
+    // 如果检测到收支，显示确认卡片
     if (resp.bill_detected) {
       const bd = resp.bill_detected;
       const pendingId = Date.now();
-      const emoji = {餐饮:'🍚',交通:'🚌',购物:'🛍️',娱乐:'🎮',医疗:'🏥',社交:'🎁',学习:'📚',通讯:'📱',杂项:'🔧',其他:'📦'};
-      replyHtml += '<div class="confirm-card" id="confirm-'+pendingId+'"><b>¥'+bd.amount.toFixed(0)+'</b> '+(bd.item||'')+' · '+(emoji[bd.category]||'💰')+' '+bd.category;
+      const isIncome = bd.type === 'income';
+      const emoji = {餐饮:'🍚',交通:'🚌',购物:'🛍️',娱乐:'🎮',医疗:'🏥',社交:'🎁',学习:'📚',通讯:'📱',杂项:'🔧',其他:'📦',工作:'💼',兼职:'💪',生活:'💰',红包:'🧧',奖学金:'🎓'};
+      const sign = isIncome ? '+' : '-';
+      const typeLabel = isIncome ? '收入' : '支出';
+      replyHtml += '<div class="confirm-card" id="confirm-'+pendingId+'"><b>'+sign+'¥'+bd.amount.toFixed(0)+'</b> '+(bd.item||'')+' · '+(emoji[bd.category]||'💰')+' '+bd.category+' · '+typeLabel;
       replyHtml += '<br><small style="color:#B0896E;">'+today()+'</small>';
-      replyHtml += '<div class="confirm-row"><button class="confirm-btn save" onclick="confirmBill('+pendingId+','+bd.amount+',\''+bd.category+'\',\''+(bd.item||'')+'\',\''+today()+'\')">✅ 确认</button>';
-      replyHtml += '<button class="confirm-btn" onclick="editBillCard('+pendingId+','+bd.amount+',\''+bd.category+'\',\''+(bd.item||'')+'\',\''+today()+'\')">✎ 编辑</button>';
-      replyHtml += '<button class="confirm-btn" onclick="cancelBill('+pendingId+')">× 取消</button></div></div>';
+      replyHtml += '<div class="confirm-row"><button class="confirm-btn save" onclick="confirmBill(\''+pendingId+'\','+bd.amount+',\''+bd.category+'\',\''+(bd.item||'')+'\',\''+today()+'\',\''+(bd.type||'expense')+'\')">✅ 确认</button>';
+      replyHtml += '<button class="confirm-btn" onclick="editBillCard(\''+pendingId+'\','+bd.amount+',\''+bd.category+'\',\''+(bd.item||'')+'\',\''+today()+'\',\''+(bd.type||'expense')+'\',\''+(bd.sub||'')+'\')">✎ 编辑</button>';
+      replyHtml += '<button class="confirm-btn" onclick="cancelCard(\''+pendingId+'\')">× 取消</button></div></div>';
+    }
+
+    // 如果检测到攒钱目标，显示确认卡片
+    if (resp.goal_detected) {
+      const gd = resp.goal_detected;
+      const pendingId = 'goal-'+Date.now();
+      replyHtml += '<div class="confirm-card" id="confirm-'+pendingId+'"><b>🎯 '+escapeHtml(gd.name)+'</b> · ¥'+gd.amount.toFixed(0);
+      replyHtml += '<br><small style="color:#B0896E;">每周约攒 ¥'+(gd.amount/4).toFixed(0)+'，一个月搞定</small>';
+      replyHtml += '<div class="confirm-row"><button class="confirm-btn save" onclick="confirmGoal(\''+pendingId+'\',\''+escapeHtml(gd.name)+'\','+gd.amount+')">✅ 创建目标</button>';
+      replyHtml += '<button class="confirm-btn" onclick="editGoalCard(\''+pendingId+'\',\''+escapeHtml(gd.name)+'\','+gd.amount+')">✎ 编辑</button>';
+      replyHtml += '<button class="confirm-btn" onclick="cancelCard(\''+pendingId+'\')">× 取消</button></div></div>';
     }
 
     addChatMsg('bot', replyHtml);
     chatMessages.push({ role: 'assistant', content: resp.reply });
+    // 持久化本轮对话（user + assistant）
+    API.saveMessages([
+      { role: 'user', content: text },
+      { role: 'assistant', content: resp.reply },
+    ]).catch(() => {});
   } catch(e) {
     hideChatTyping();
-    addChatMsg('bot', '唔…网络好像不太稳，稍等再试一下？');
+    if (e.name !== 'AbortError') {
+      addChatMsg('bot', '唔…网络好像不太稳，稍等再试一下？');
+    }
   }
 
+  chatAbortController = null;
+  setChatBusy(false);
   updateStatus();
   updateMascot(currentPage, 'after_chat');
 }
 
-// 确认记账
-async function confirmBill(pendingId, amt, cat, item, date) {
+// 确认记账（chat 中检测到的收支）
+async function confirmBill(pendingId, amt, cat, item, date, type) {
   try {
-    await API.confirmBill(amt, cat, item, date);
+    if (type === 'income') {
+      await API.manualBill(amt, cat, item, date, 'income');
+    } else {
+      await API.confirmBill(amt, cat, item, date);
+    }
     const card = document.getElementById('confirm-'+pendingId);
     if (card) card.innerHTML = '<div style="color:#7ECB7E;">✅ 已保存！</div>';
-    setTimeout(() => { if (card.parentElement) card.parentElement.style.display='none'; }, 1000);
     updateStatus(); refreshAll();
   } catch(e) { alert('保存失败，请重试'); }
 }
 
-function cancelBill(pendingId) {
+function cancelBill(pendingId) { cancelCard(pendingId); }
+
+function cancelCard(pendingId) {
   const card = document.getElementById('confirm-'+pendingId);
   if (card) card.innerHTML = '<div style="color:#C4A88C;">已取消</div>';
-  setTimeout(() => { if (card.parentElement) card.parentElement.style.display='none'; }, 1000);
 }
 
-function editBillCard(pendingId, amt, cat, item, date) {
+// 确认攒钱目标
+async function confirmGoal(pendingId, name, amount) {
+  try {
+    const resp = await API.createGoal(name, amount);
+    const card = document.getElementById('confirm-'+pendingId);
+    if (resp.goal) {
+      if (card) card.innerHTML = '<div style="color:#7ECB7E;">✅ 目标已创建！</div>';
+    } else {
+      if (card) card.innerHTML = '<div style="color:#E8886A;">'+escapeHtml(resp.message||'创建失败')+'</div>';
+    }
+    updateStatus(); refreshAll();
+  } catch(e) { alert('创建失败，请重试'); }
+}
+
+function editGoalCard(pendingId, name, amount) {
+  document.getElementById('gName').value = name;
+  document.getElementById('gAmount').value = amount;
+  document.getElementById('goalModal').classList.add('show');
+  window._pendingGoalCardId = pendingId;
+}
+function editBillCard(pendingId, amt, cat, item, date, type, sub) {
   document.getElementById('mAmount').value = amt;
   document.getElementById('mNote').value = item || '';
   document.getElementById('mDate').value = date;
-  document.querySelectorAll('#chipRow .chip').forEach(c => { c.classList.toggle('selected', c.dataset.cat === cat); });
+  const isIncome = type === 'income';
+  setBillType(isIncome ? 'income' : 'expense');
+  const chipRow = isIncome ? document.getElementById('incomeChipRow') : document.getElementById('chipRow');
+  chipRow.querySelectorAll('.chip').forEach(c => { c.classList.toggle('selected', c.dataset.cat === cat); });
+  if (!isIncome) {
+    updateSubChips(cat);
+    // 选中 AI 匹配的二级分类
+    if (sub) {
+      document.querySelectorAll('#subChipRow .chip').forEach(c => {
+        c.classList.toggle('selected', c.dataset.sub === sub);
+      });
+    }
+  }
   document.getElementById('modal').classList.add('show');
-  document.getElementById('modalTitle').textContent = '✏️ 编辑消费';
+  document.getElementById('modalTitle').textContent = isIncome ? '✏️ 编辑收入' : '✏️ 编辑消费';
   window._pendingCardId = pendingId;
+  window._pendingIsIncome = isIncome;
 }
 
 // ==================== 语音输入 ====================
@@ -969,16 +1274,27 @@ async function refreshStats() {
 
   // 2. 月度总览
   html += '<div class="stat-section"><div class="stat-section-title">📅 本月总览</div><div class="stat-card">';
-  const monthPct = Math.round(monthData.pct);
-  html += '<div class="month-summary"><div class="ring-wrap"><svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="32" fill="none" stroke="#F0E4D8" stroke-width="8"/><circle cx="40" cy="40" r="32" fill="none" stroke="'+(monthPct>80?'#E8886A':'#7ECB7E')+'" stroke-width="8" stroke-dasharray="'+Math.round(monthPct/100*201)+' 201" stroke-linecap="round"/></svg><div class="ring-center"><div class="ring-big">'+monthPct+'%</div><div class="ring-sub">已用</div></div></div>';
-  html += '<div style="flex:1;min-width:0;"><div style="font-size:1.5rem;font-weight:700;color:#4A3222;">¥'+Math.abs(monthData.total).toFixed(0)+'</div>';
-  html += '<div style="font-size:0.78rem;color:#B0896E;">本月已花 · 日均 ¥'+monthData.avg_daily+'</div>';
-  if (monthData.remaining > 0) {
-    html += '<div style="font-size:0.78rem;color:#7ECB7E;margin-top:0.15rem;">还剩 ¥'+monthData.remaining+'</div>';
-  } else if (getBudget() > 0) {
-    html += '<div style="font-size:0.78rem;color:#E8886A;margin-top:0.15rem;">已超预算 ¥'+Math.abs(monthData.remaining)+'</div>';
+  const budget = getBudget();
+  if (budget > 0) {
+    const monthPct = Math.round(monthData.pct);
+    html += '<div class="month-summary"><div class="ring-wrap"><svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="32" fill="none" stroke="#F0E4D8" stroke-width="8"/><circle cx="40" cy="40" r="32" fill="none" stroke="'+(monthPct>80?'#E8886A':'#7ECB7E')+'" stroke-width="8" stroke-dasharray="'+Math.round(monthPct/100*201)+' 201" stroke-linecap="round"/></svg><div class="ring-center"><div class="ring-big">'+monthPct+'%</div><div class="ring-sub">已用</div></div></div>';
+    html += '<div style="flex:1;min-width:0;"><div style="font-size:1.5rem;font-weight:700;color:#4A3222;">¥'+Math.abs(monthData.total).toFixed(0)+'</div>';
+    html += '<div style="font-size:0.78rem;color:#B0896E;">本月已花 · 日均 ¥'+monthData.avg_daily+'</div>';
+    if (monthData.remaining > 0) {
+      html += '<div style="font-size:0.78rem;color:#7ECB7E;margin-top:0.15rem;">还剩 ¥'+monthData.remaining+'</div>';
+    } else {
+      html += '<div style="font-size:0.78rem;color:#E8886A;margin-top:0.15rem;">已超预算 ¥'+Math.abs(monthData.remaining)+'</div>';
+    }
+    html += '</div></div>';
+  } else {
+    html += '<div style="text-align:center;padding:0.5rem 0;">';
+    html += '<div style="font-size:1.5rem;font-weight:700;color:#4A3222;">¥'+Math.abs(monthData.total).toFixed(0)+'</div>';
+    html += '<div style="font-size:0.78rem;color:#B0896E;margin-top:0.2rem;">本月已花 · 日均 ¥'+monthData.avg_daily+'</div>';
+    html += '<div style="font-size:0.82rem;color:#C4A88C;margin-top:0.6rem;">还未设置月生活费预算</div>';
+    html += '<button class="btn" style="margin-top:0.4rem;width:auto;display:inline-block;padding:0.35rem 1.2rem;" onclick="editBudget()">去设置</button>';
+    html += '</div>';
   }
-  html += '</div></div></div></div>';
+  html += '</div></div>';
 
   // 3. 消费画像
   html += '<div class="stat-section"><div class="stat-section-title">🏷️ 消费画像</div><div class="stat-card">';
@@ -1050,15 +1366,19 @@ async function refreshStats() {
     html += '<text x="' + pieCx + '" y="' + (pieCy + 11) + '" text-anchor="middle" font-size="8" fill="#B0896E">本周支出</text>';
     html += '</svg>';
 
-    // 右侧图例：分类名 + 金额 + 真实占比
-    html += '<div style="flex:1;min-width:0;">';
+    // 右侧图例：两行式（分类名 / 金额+占比）
+    html += '<div style="flex:1;min-width:0;padding-left:25px;">';
     pieEntries.forEach(([cat, amt]) => {
       const pct = Math.round(amt / pieTotal * 100);
       const color = CAT_COLOR[cat] || '#D4B89C';
-      html += '<div class="legend-item" style="margin-bottom:4px;"><span class="legend-dot" style="background:' + color + ';"></span>'
+      html += '<div style="margin-bottom:6px;">'
+        + '<div style="display:flex;align-items:center;gap:4px;font-size:0.82rem;color:#4A3222;">'
+        + '<span class="legend-dot" style="background:' + color + ';display:inline-block;width:7px;height:7px;border-radius:50%;flex-shrink:0;"></span>'
         + (EXPENSE_EMOJI[cat] || '💰') + ' ' + cat
-        + ' <span style="margin-left:auto;font-size:0.7rem;color:#B0896E;">¥' + amt.toFixed(0) + '</span>'
-        + ' <span style="font-size:0.7rem;color:#C4A88C;min-width:32px;text-align:right;display:inline-block;">' + pct + '%</span>'
+        + '</div>'
+        + '<div style="font-size:0.7rem;color:#B0896E;padding-left:11px;margin-top:1px;">'
+        + '¥' + amt.toFixed(0) + ' · ' + pct + '%'
+        + '</div>'
         + '</div>';
     });
     html += '</div></div>';
@@ -1083,7 +1403,7 @@ async function refreshBills() {
   // 获取该月每日收支
   let dailyAll = {};
   try {
-    const r = await fetch('/api/report/month-daily/'+_cy+'/'+_cm);
+    const r = await fetch('/api/report/month-daily/'+_cy+'/'+_cm, { headers:authHeaders() });
     dailyAll = await r.json();
   } catch(e) {}
 
@@ -1133,7 +1453,14 @@ async function refreshBills() {
     selBills.forEach(b => {
       const sign = b.type==='income'?'+':'-';
       const amtColor = b.type==='income'?'#7ECB7E':'#E8886A';
-      html += '<div class="stat-row" style="padding:0.25rem 0;"><span style="cursor:pointer;" onclick="editBill('+b.id+')">'+(catEmoji[b.category]||'💰')+' '+b.category+' · '+(b.item||'无备注')+'</span><span style="font-weight:600;color:'+amtColor+';">'+sign+'¥'+b.amount.toFixed(0)+' <button onclick="event.stopPropagation();deleteBill('+b.id+')" style="background:none;border:none;cursor:pointer;font-size:0.8rem;color:#D47860;" title="删除">×</button></span></div>';
+      const itemEsc = (b.item||'').replace(/'/g,"\\'");
+      const catEsc = (b.category||'').replace(/'/g,"\\'");
+      html += '<div class="stat-row" style="padding:0.25rem 0;cursor:pointer;" onclick="viewBill(' + b.id + ',' + b.amount + ',\'' + catEsc + '\',\'' + itemEsc + '\',\'' + (b.date||'') + '\',\'' + (b.type||'expense') + '\')">'
+        + '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;">' + (catEmoji[b.category]||'💰') + ' ' + b.category + ' · ' + (b.item||'无备注') + '</span>'
+        + '<span style="font-weight:600;color:' + amtColor + ';margin-right:70px;white-space:nowrap;flex-shrink:0;">' + sign + '¥' + b.amount.toFixed(0)
+        + ' <button onclick="event.stopPropagation();editBill(' + b.id + ',' + b.amount + ',\'' + catEsc + '\',\'' + itemEsc + '\',\'' + (b.date||'') + '\',\'' + (b.type||'expense') + '\')" style="background:none;border:none;cursor:pointer;font-size:0.75rem;color:#E8886A;padding:0 3px;" title="编辑">✎</button>'
+        + ' <button onclick="event.stopPropagation();deleteBill(' + b.id + ')" style="background:none;border:none;cursor:pointer;font-size:0.85rem;color:#D47860;padding:0 3px;" title="删除">×</button>'
+        + '</span></div>';
     });
     html += '</div>';
   }
@@ -1145,9 +1472,18 @@ async function refreshBills() {
 // ==================== 我的页 ====================
 async function refreshMe() {
   const [monthData, goalResp] = await Promise.all([API.monthReport(getBudget()), API.getGoal()]);
-  const goal = goalResp.goal;
+  const goals = goalResp.goals || [];
+  const activeGoals = goals.filter(g => !g.completed);
+  const completedGoals = goals.filter(g => g.completed);
   const allBillsTotal = monthData.count;
   let html = '';
+
+  // 用户信息
+  html += '<div class="profile-section"><div style="display:flex;align-items:center;gap:0.8rem;padding:0.5rem 0;">';
+  html += '<div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#FFE8D6,#FFD4BC);border:2px solid #E8B898;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">🌾</div>';
+  html += '<div><div style="font-size:1.1rem;font-weight:600;color:#4A3222;">'+escapeHtml(getUsername())+'</div>';
+  html += '<div style="font-size:0.75rem;color:#B0896E;">小满陪你第 '+daysSinceStart()+' 天</div></div>';
+  html += '</div></div>';
 
   // 月预算
   html += '<div class="profile-section"><div class="profile-section-title">💰 月生活预算</div><div class="profile-card">';
@@ -1166,17 +1502,25 @@ async function refreshMe() {
 
   // 攒钱目标
   html += '<div class="profile-section"><div class="profile-section-title">🎯 攒钱目标</div>';
-  if (!goal) {
+  if (goals.length === 0) {
     html += '<div class="profile-card" style="text-align:center;color:#C4A88C;font-size:0.9rem;">还没有攒钱目标<br>去「对话」页跟小满说说吧~</div>';
   } else {
-    const pct = Math.min(100, Math.round(goal.saved_amount/goal.target_amount*100));
-    html += '<div class="profile-card"><div class="goal-row"><span class="goal-name">'+escapeHtml(goal.name)+'</span>';
-    if (goal.completed) html += '<span class="tag" style="background:#E8F5E0;color:#5A8A4A;">已达成 🎉</span>';
-    html += '</div>';
-    html += '<div style="display:flex;align-items:center;gap:0.6rem;"><span style="font-size:1.8rem;">🎯</span><div style="flex:1;min-width:0;"><div style="font-size:0.82rem;font-weight:600;color:#4A3222;">'+escapeHtml(goal.name)+'</div><div class="goal-bar-wrap"><div class="goal-bar-fill" style="width:'+pct+'%"></div></div><div style="font-size:0.7rem;color:#B0896E;margin-top:0.2rem;">¥'+goal.saved_amount.toFixed(0)+' / ¥'+goal.target_amount+' ('+pct+'%)</div></div></div>';
-    html += '<div class="goal-hint" style="margin-top:0.5rem;">'+(goal.completed?'恭喜达成目标！🎉':'还差 ¥'+(goal.target_amount-goal.saved_amount).toFixed(0)+' · 继续加油 💪')+'</div>';
-    if (!goal.completed) html += '<button class="btn" onclick="deleteGoal()">放弃此目标</button>';
-    html += '</div>';
+    // 未完成目标
+    activeGoals.forEach(g => {
+      const pct = Math.min(100, Math.round(g.saved_amount/g.target_amount*100));
+      html += '<div class="profile-card" style="margin-bottom:0.5rem;"><div class="goal-row"><span class="goal-name">'+escapeHtml(g.name)+'</span></div>';
+      html += '<div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.3rem;"><span style="font-size:1.4rem;">🎯</span><div style="flex:1;min-width:0;"><div class="goal-bar-wrap"><div class="goal-bar-fill" style="width:'+pct+'%"></div></div><div style="font-size:0.7rem;color:#B0896E;margin-top:0.2rem;">¥'+g.saved_amount.toFixed(0)+' / ¥'+g.target_amount+' ('+pct+'%)</div></div></div>';
+      html += '<div class="goal-hint" style="margin-top:0.4rem;">还差 ¥'+(g.target_amount-g.saved_amount).toFixed(0)+' · 继续加油 💪</div>';
+      html += '<div style="display:flex;gap:0.3rem;margin-top:0.5rem;"><input id="meSave_'+g.id+'" type="number" placeholder="攒一笔" step="1" min="0" inputmode="numeric" style="flex:1;border:1.5px solid #D4B89C;border-radius:0.4rem;padding:0.3rem 0.4rem;font-size:0.8rem;background:#FFFBEB;color:#4A3222;outline:none;font-family:inherit;-moz-appearance:textfield;"><button onclick="addMeSavings('+g.id+')" style="padding:0.3rem 0.6rem;border-radius:0.4rem;border:1.5px solid #E2CEB8;background:linear-gradient(135deg,#FFF5EB,#FFEDE0);color:#7A5E48;font-size:0.8rem;cursor:pointer;font-family:inherit;white-space:nowrap;">💰 攒了</button><button onclick="deleteGoal('+g.id+')" style="padding:0.3rem 0.6rem;border-radius:0.4rem;border:1.5px solid #E8D5C0;background:linear-gradient(135deg,#FFF5EB,#FFEDE0);color:#C4A08A;font-size:0.8rem;cursor:pointer;font-family:inherit;white-space:nowrap;">放弃</button></div>';
+      html += '</div>';
+    });
+    // 已完成目标
+    completedGoals.forEach(g => {
+      html += '<div class="profile-card" style="margin-bottom:0.5rem;background:#F8FFF5;"><div class="goal-row"><span class="goal-name">'+escapeHtml(g.name)+'</span><span class="tag" style="background:#E8F5E0;color:#5A8A4A;">已达成 🎉</span></div>';
+      html += '<div style="font-size:0.82rem;color:#7ECB7E;margin-top:0.3rem;">¥'+g.saved_amount.toFixed(0)+' / ¥'+g.target_amount+' 🎊</div>';
+      html += '<button class="btn" style="margin-top:0.4rem;background:#E8F5E0;color:#5A8A4A;border-color:#7ECB7E;" onclick="dismissAndRefresh('+g.id+')">✅ 完成，开始新目标</button>';
+      html += '</div>';
+    });
   }
   html += '</div>';
 
@@ -1184,7 +1528,9 @@ async function refreshMe() {
   html += '<div class="profile-section"><div class="profile-section-title">📦 数据</div><div class="profile-card">';
   html += '<div class="stat-row"><span>累计消费</span><span>¥'+Math.abs(monthData.total).toFixed(0)+'</span></div>';
   html += '<div class="stat-row"><span>陪伴天数</span><span>'+daysSinceStart()+' 天</span></div>';
-  html += '<button class="btn" style="margin-top:0.6rem;color:#E8886A;border-color:#E8C8A8;" onclick="resetAll()">🔄 重置所有数据</button>';
+  const completedCount = goalResp.completed_count || 0;
+  if (completedCount > 0) html += '<div class="stat-row"><span>🏆 已达成目标</span><span>'+completedCount+' 个</span></div>';
+  html += '<button class="btn" style="margin-top:0.4rem;color:#B0896E;border-color:#D4B89C;" onclick="logout()">🚪 退出登录</button>';
   html += '</div></div>';
 
   document.getElementById('meContent').innerHTML = html;
@@ -1195,9 +1541,32 @@ async function editBudget() {
   if (val !== null && val > 0) { setBudget(val); refreshAll(); }
 }
 
-async function deleteGoal() {
-  if (await showConfirm('确定要放弃当前攒钱目标吗？')) {
-    await API.deleteGoal(); refreshAll();
+async function addHomeSavings(goalId) {
+  const inp = document.getElementById('homeSave_'+goalId);
+  const amt = parseFloat(inp.value);
+  if (!amt || amt <= 0) return;
+  await API.addGoalSavings(amt, goalId);
+  inp.value = '';
+  refreshAll();
+}
+
+async function addMeSavings(goalId) {
+  const inp = document.getElementById('meSave_'+goalId);
+  const amt = parseFloat(inp.value);
+  if (!amt || amt <= 0) return;
+  await API.addGoalSavings(amt, goalId);
+  inp.value = '';
+  refreshAll();
+}
+
+async function dismissAndRefresh(goalId) {
+  await API.dismissGoal(goalId);
+  refreshAll();
+}
+
+async function deleteGoal(goalId) {
+  if (await showConfirm('确定要放弃这个攒钱目标吗？')) {
+    await API.deleteGoal(goalId); refreshAll();
   }
 }
 
@@ -1207,14 +1576,79 @@ async function deleteBill(id) {
   }
 }
 
-function editBill(id) {
-  // 需要通过 API 获取账单详情。简化处理：从缓存中找
+function resetModalForm() {
+  document.getElementById('mAmount').style.display = '';
+  document.getElementById('mDate').style.display = '';
+  document.getElementById('mNote').style.display = '';
+  document.querySelectorAll('#modal .field-label').forEach(el => el.style.display = '');
+  document.getElementById('typeRow').style.display = '';
+  document.getElementById('chipRow').style.display = '';
+  document.getElementById('subChipRow').style.display = '';
+  document.getElementById('subLabel').style.display = '';
+  document.getElementById('incomeChipRow').style.display = '';
+  const detailView = document.getElementById('billDetailView');
+  if (detailView) detailView.remove();
+  const btnRow = document.querySelector('#modal .modal-btn-row');
+  btnRow.innerHTML = '<button onclick="closeManual()">取消</button><button class="primary" onclick="submitManual()">保存</button>';
+}
+
+function editBill(id, amount, category, item, date, type) {
+  resetModalForm();
   editingBillId = id;
-  document.getElementById('mAmount').value = '';
-  document.getElementById('mNote').value = '';
-  document.getElementById('mDate').value = today();
+  document.getElementById('mAmount').value = amount;
+  document.getElementById('mNote').value = item || '';
+  document.getElementById('mDate').value = date || today();
   document.getElementById('modal').classList.add('show');
   document.getElementById('modalTitle').textContent = '✏️ 编辑账单';
+  currentBillType = type || 'expense';
+  setBillType(currentBillType);
+  // 选中对应分类
+  const chipRow = type === 'income' ? document.getElementById('incomeChipRow') : document.getElementById('chipRow');
+  chipRow.querySelectorAll('.chip').forEach(c => { c.classList.toggle('selected', c.dataset.cat === category); });
+  if (type !== 'income') updateSubChips(category);
+}
+
+function viewBill(id, amount, category, item, date, type) {
+  const isIncome = type === 'income';
+  const emoji = {餐饮:'🍚',交通:'🚌',购物:'🛍️',娱乐:'🎮',医疗:'🏥',社交:'🎁',学习:'📚',通讯:'📱',杂项:'🔧',其他:'📦',工作:'💼',兼职:'💪',生活:'💰',红包:'🧧',奖学金:'🎓'};
+  const sign = isIncome ? '+' : '-';
+  const amtColor = isIncome ? '#7ECB7E' : '#E8886A';
+  const typeLabel = isIncome ? '收入' : '支出';
+
+  document.getElementById('modalTitle').textContent = '📋 账单详情';
+  // 隐藏编辑表单，显示详情卡
+  document.getElementById('mAmount').style.display = 'none';
+  document.getElementById('mDate').style.display = 'none';
+  document.getElementById('mNote').style.display = 'none';
+  document.querySelectorAll('#modal .field-label').forEach(el => el.style.display = 'none');
+  document.getElementById('typeRow').style.display = 'none';
+  document.getElementById('chipRow').style.display = 'none';
+  document.getElementById('subChipRow').style.display = 'none';
+  document.getElementById('subLabel').style.display = 'none';
+  document.getElementById('incomeChipRow').style.display = 'none';
+  const btnRow = document.querySelector('#modal .modal-btn-row');
+  // 构建详情内容
+  const detailDiv = document.getElementById('billDetailView') || document.createElement('div');
+  detailDiv.id = 'billDetailView';
+  detailDiv.innerHTML = ''
+    + '<div style="text-align:center;margin-bottom:0.5rem;font-size:1rem;color:#4A3222;">' + (emoji[category]||'💰') + ' ' + (category||'其他') + '</div>'
+    + (item ? '<div style="text-align:center;margin-bottom:0.6rem;font-size:0.82rem;color:#7A5E48;word-break:break-word;line-height:1.5;padding:0.4rem 0.5rem;background:#FFFBF5;border-radius:8px;">备注：' + item.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div>' : '')
+    + '<div style="text-align:center;margin-bottom:0.5rem;">'
+    + '<span style="font-size:2rem;font-weight:700;color:' + amtColor + ';">' + sign + '¥' + amount.toFixed(2) + '</span>'
+    + '</div>'
+    + '<div style="display:flex;justify-content:space-around;font-size:0.82rem;color:#7A5E48;padding:0.5rem 0;border-top:1px dashed #E2CEB8;">'
+    + '<span>类型：<b>' + typeLabel + '</b></span>'
+    + '<span>日期：<b>' + date + '</b></span>'
+    + '</div>';
+  // 插入到按钮行之前
+  const modalForm = document.querySelector('#modal .modal-form');
+  const existing = document.getElementById('billDetailView');
+  if (!existing) modalForm.insertBefore(detailDiv, btnRow);
+  // 修改按钮
+  btnRow.innerHTML = ''
+    + '<button onclick="closeManual()">关闭</button>'
+    + '<button class="primary" onclick="closeManual();editBill(' + id + ',' + amount + ',\'' + (category||'').replace(/'/g,"\\'") + '\',\'' + (item||'').replace(/'/g,"\\'") + '\',\'' + (date||'') + '\',\'' + (type||'expense') + '\')">✏️ 编辑</button>';
+  document.getElementById('modal').classList.add('show');
 }
 
 // ==================== 手动记账 ====================
@@ -1222,6 +1656,7 @@ let editingBillId = null;
 let currentBillType = 'expense';
 
 function openManual() {
+  resetModalForm();
   editingBillId = null;
   window._pendingCardId = null;
   document.getElementById('modalTitle').textContent = '✏️ 记一笔';
@@ -1235,6 +1670,42 @@ function openManual() {
 }
 
 function closeManual() { editingBillId = null; document.getElementById('modal').classList.remove('show'); }
+
+// ==================== 攒钱目标弹窗 ====================
+function openGoalModal() {
+  document.getElementById('gName').value = '';
+  document.getElementById('gAmount').value = '';
+  document.getElementById('goalModal').classList.add('show');
+  setTimeout(() => document.getElementById('gName').focus(), 100);
+}
+
+function closeGoalModal() {
+  document.getElementById('goalModal').classList.remove('show');
+}
+
+async function submitGoal() {
+  const name = document.getElementById('gName').value.trim();
+  const amount = parseFloat(document.getElementById('gAmount').value);
+  if (!name || !amount || amount <= 0) return;
+  const resp = await API.createGoal(name, amount);
+  closeGoalModal();
+
+  // 如果是从对话卡片编辑来的，更新卡片状态
+  if (window._pendingGoalCardId) {
+    const card = document.getElementById('confirm-'+window._pendingGoalCardId);
+    if (resp.goal) {
+      if (card) card.innerHTML = '<div style="color:#7ECB7E;">✅ 目标已创建！</div>';
+    } else if (resp.message) {
+      if (card) card.innerHTML = '<div style="color:#E8886A;">'+escapeHtml(resp.message)+'</div>';
+    }
+    window._pendingGoalCardId = null;
+  } else if (resp.goal) {
+    switchTab('me');
+  } else if (resp.message) {
+    alert(resp.message);
+  }
+  refreshAll();
+}
 
 // ==================== 自定义弹窗（替代浏览器 confirm/prompt） ====================
 let confirmResolver = null;
@@ -1345,10 +1816,15 @@ async function submitManual() {
       addChatMsg('bot', '已更新 📝 '+cat+' ¥'+amt.toFixed(0));
     }
   } else if (window._pendingCardId) {
-    await API.confirmBill(amt, cat, note, date);
+    if (window._pendingIsIncome) {
+      await API.manualBill(amt, cat, note, date, 'income');
+    } else {
+      await API.confirmBill(amt, cat, note, date);
+    }
     const card = document.getElementById('confirm-'+window._pendingCardId);
     if (card) card.innerHTML = '<div style="color:#7ECB7E;">✅ 已保存！</div>';
     window._pendingCardId = null;
+    window._pendingIsIncome = false;
   } else {
     await API.manualBill(amt, cat, note, date, currentBillType);
     if (onChat) {
@@ -1360,19 +1836,6 @@ async function submitManual() {
   }
   closeManual();
   refreshAll();
-}
-
-// ==================== 重置 ====================
-async function resetAll() {
-  if (await showConfirm('确定要清空所有数据吗？此操作不可恢复。')) {
-    // 清空 localStorage
-    localStorage.clear();
-    setStartDate(today());
-    chatMessages = [];
-    chatMsgs.innerHTML = '';
-    addChatMsg('bot', '晚上好呀 ✨<br>我是小满，你的理财搭子~<br><br>试试看：<br>• 跟我说 <b>「午饭15」</b> 记一笔<br>• 问我 <b>「今天花了多少」</b><br>• <b>「想攒300买耳机」</b> 定目标<br><br>开始吧 🌱');
-    refreshAll();
-  }
 }
 
 // ==================== 全局 ====================
@@ -1390,6 +1853,7 @@ function refreshAll() {
   refreshMe();
   if (currentPage==='stats') refreshStats();
   if (currentPage==='bills') refreshBills();
+  warmupMascotCache();
 }
 
 // 键盘
@@ -1397,28 +1861,123 @@ chatInput.addEventListener('keydown', e => {
   if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); chatSend(); }
 });
 
-// ==================== 初始化 ====================
-async function init() {
-  if (!localStorage.getItem(START_KEY)) setStartDate(today());
+// ==================== 认证 ====================
+let authMode = 'login';  // 'login' | 'register'
 
-  let welcomeText = '晚上好呀 ✨<br>我是小满，你的理财搭子~';
-  try {
-    const [td, gd] = await Promise.all([API.todayReport(), API.getGoal()]);
-    const t = Math.abs(td.total);
-    if (t > 0) welcomeText += '<br>今天已花 ¥'+t.toFixed(0);
-    if (gd.goal && !gd.goal.completed) welcomeText += '<br>攒钱目标进行中，加油 💪';
-    if (td.breakdown.length === 0 && !gd.goal && !getBudget()) {
-      welcomeText += '<br><br>试试看：<br>• 跟我说 <b>「午饭15」</b> 记一笔<br>• 问我 <b>「今天花了多少」</b><br>• <b>「想攒300买耳机」</b> 定目标<br><br>开始吧 🌱';
-    }
-  } catch(e) {
-    welcomeText += '<br>（后端未连接，请先启动服务）';
+function showAuthError(msg) {
+  document.getElementById('authError').textContent = msg || '';
+}
+
+async function doAuth() {
+  const username = document.getElementById('authUsername').value.trim();
+  const password = document.getElementById('authPassword').value;
+  if (!username || !password) { showAuthError('请填写用户名和密码'); return; }
+
+  if (authMode === 'register') {
+    const pw2 = document.getElementById('authPassword2').value;
+    if (password !== pw2) { showAuthError('两次密码不一致'); return; }
+    const resp = await API.register(username, password);
+    if (!resp.ok) { showAuthError(resp.message); return; }
+    setToken(resp.token);
+    setUsername(username);
+  } else {
+    const resp = await API.login(username, password);
+    if (!resp.ok) { showAuthError(resp.message); return; }
+    setToken(resp.token);
+    setUsername(username);
   }
 
-  addChatMsg('bot', welcomeText);
-  chatMessages.push({ role: 'assistant', content: '晚上好呀 ✨ 我是小满，你的理财搭子~' });
+  document.getElementById('authOverlay').style.display = 'none';
+  await mainInit();
+}
+
+function toggleAuthMode() {
+  if (authMode === 'login') {
+    authMode = 'register';
+    document.getElementById('authSub').textContent = '注册你的理财搭子';
+    document.getElementById('authBtn').textContent = '注 册';
+    document.getElementById('authSwitch').textContent = '已有账号？去登录 →';
+    document.getElementById('authPassword2').style.display = '';
+  } else {
+    authMode = 'login';
+    document.getElementById('authSub').textContent = '登录你的理财搭子';
+    document.getElementById('authBtn').textContent = '登 录';
+    document.getElementById('authSwitch').textContent = '没有账号？去注册 →';
+    document.getElementById('authPassword2').style.display = 'none';
+  }
+  showAuthError('');
+}
+
+async function logout() {
+  clearToken();
+  location.reload();
+}
+
+// ==================== 初始化 ====================
+async function init() {
+  const token = getToken();
+  if (!token) { showAuthOverlay(); return; }
+
+  // 验证 token
+  try {
+    await API.me();
+  } catch(e) {
+    clearToken();
+    showAuthOverlay();
+    return;
+  }
+
+  mainInit();
+}
+
+function showAuthOverlay() {
+  document.getElementById('authOverlay').style.display = 'flex';
+  document.getElementById('authUsername').focus();
+}
+
+async function mainInit() {
+  if (!localStorage.getItem(START_KEY)) setStartDate(today());
+
+  // 尝试加载历史消息
+  let hasHistory = false;
+  try {
+    const resp = await API.getMessages(100);
+    if (resp.messages && resp.messages.length > 0) {
+      hasHistory = true;
+      chatMessages = resp.messages.map(m => ({ role: m.role, content: m.content }));
+      // 渲染到对话页
+      chatMsgs.innerHTML = '';
+      chatMessages.forEach(m => {
+        if (m.role === 'assistant') {
+          addChatMsg('bot', escapeHtml(m.content).replace(/\n/g, '<br>'));
+        } else {
+          addChatMsg('user', escapeHtml(m.content));
+        }
+      });
+      scrollChatBottom();
+    }
+  } catch(e) {}
+
+  if (!hasHistory) {
+    let welcomeText = '晚上好呀 ✨<br>我是小满，你的理财搭子~';
+    try {
+      const [td, gd] = await Promise.all([API.todayReport(), API.getGoal()]);
+      const t = Math.abs(td.total);
+      if (t > 0) welcomeText += '<br>今天已花 ¥'+t.toFixed(0);
+      if (gd.goals && gd.goals.some(g => !g.completed)) welcomeText += '<br>攒钱目标进行中，加油 💪';
+      if (td.breakdown.length === 0 && (!gd.goals || gd.goals.length === 0) && !getBudget()) {
+        welcomeText += '<br><br>试试看：<br>• 跟我说 <b>「午饭15」</b> 记一笔<br>• 问我 <b>「今天花了多少」</b><br>• <b>「想攒300买耳机」</b> 定目标<br><br>开始吧 🌱';
+      }
+    } catch(e) {
+      welcomeText += '<br>（后端未连接，请先启动服务）';
+    }
+    addChatMsg('bot', welcomeText);
+    // 欢迎语不加入 chatMessages，AI 首轮对话会自然问候
+  }
 
   refreshAll();
-  setTimeout(() => updateMascot('home', 'init'), 600);
+  warmupMascotCache();
+  setTimeout(() => updateMascot('home', 'init'), 2500);
 }
 
 init();

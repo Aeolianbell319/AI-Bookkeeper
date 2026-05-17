@@ -5,15 +5,15 @@ import json
 import os
 import httpx
 
-from persona import CHAT_PROMPT, EXTRACT_PROMPT, MASCOT_PROMPT
+from persona import CHAT_PROMPT, EXTRACT_PROMPT, GOAL_EXTRACT_PROMPT, MASCOT_PROMPT
 
 DEEPSEEK_BASE = "https://api.deepseek.com"
 DEEPSEEK_CHAT_URL = f"{DEEPSEEK_BASE}/v1/chat/completions"
 API_KEY = os.environ.get("DEEPSEEK_API_KEY", "")
 
-# V4 Flash：轻量快速 — 用于 NLU 提取、人偶碎碎念
-# V4 Pro：深度推理 — 用于主对话
-MODEL_FLASH = "deepseek-v4-flash"
+# deepseek-chat：轻量快速 — 用于 NLU 提取、人偶碎碎念
+# deepseek-v4-pro：深度推理 — 用于主对话
+MODEL_FLASH = "deepseek-chat"
 MODEL_PRO = "deepseek-v4-pro"
 
 
@@ -56,7 +56,7 @@ async def chat(messages: list[dict], context: dict | None = None) -> str:
 
 
 async def extract_bill(user_text: str) -> dict | None:
-    """从用户消息中提取消费信息（Flash 模型），返回 {amount, category, item} 或 None"""
+    """从用户消息中提取收支信息（Flash 模型），返回 {type, amount, category, item} 或 None"""
     messages = [
         {"role": "system", "content": EXTRACT_PROMPT},
         {"role": "user", "content": user_text},
@@ -67,20 +67,88 @@ async def extract_bill(user_text: str) -> dict | None:
         result = json.loads(raw)
         if result.get("amount") and result["amount"] > 0:
             return {
+                "type": result.get("type", "expense"),
                 "amount": float(result["amount"]),
                 "category": result.get("category", "其他"),
                 "item": result.get("item", ""),
+                "sub": result.get("sub", ""),
             }
     except (json.JSONDecodeError, ValueError):
         pass
     return None
 
 
-async def mascot_chat(context_str: str) -> str:
-    """人偶碎碎念（Flash 模型）：一句话，≤30字"""
+async def extract_goal(user_text: str) -> dict | None:
+    """从用户消息中提取攒钱目标，返回 {name, amount} 或 None"""
     messages = [
-        {"role": "system", "content": MASCOT_PROMPT},
+        {"role": "system", "content": GOAL_EXTRACT_PROMPT},
+        {"role": "user", "content": user_text},
+    ]
+    raw = await _call_deepseek(messages, model=MODEL_FLASH, temperature=0.1, max_tokens=100)
+    try:
+        raw = raw.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
+        result = json.loads(raw)
+        if result.get("amount") and result["amount"] > 0 and result.get("name"):
+            return {"name": result["name"], "amount": float(result["amount"])}
+    except (json.JSONDecodeError, ValueError):
+        pass
+    return None
+
+
+async def _mascot_once(context_str: str, topic_hint: str = "") -> str:
+    """单次碎碎念：空返回时重试"""
+    prompt = MASCOT_PROMPT
+    if topic_hint:
+        prompt = prompt.rstrip() + f"\n（优先聊「{topic_hint}」这个话题）\n"
+    messages = [
+        {"role": "system", "content": prompt},
         {"role": "user", "content": context_str},
     ]
-    text = await _call_deepseek(messages, model=MODEL_FLASH, temperature=0.9, max_tokens=80)
-    return text.strip()[:60]
+    text = await _call_deepseek(messages, model=MODEL_FLASH, temperature=1.0, max_tokens=100)
+    result = text.strip()[:60]
+    if result:
+        print(f"[mascot] ok: '{result[:50]}'")
+        return result
+    print("[mascot] 空返回，重试...")
+    text = await _call_deepseek(messages, model=MODEL_FLASH, temperature=1.3, max_tokens=100)
+    result = text.strip()[:60]
+    print(f"[mascot] 重试: '{result[:50]}'")
+    return result
+
+
+async def warmup_mascot(context_str: str) -> dict:
+    """预热四个页面的碎碎念，每页不同话题方向"""
+    import asyncio
+    from datetime import datetime
+
+    now = datetime.now()
+    hour = now.hour
+    weekday = now.weekday()
+    time_info = f"现在是{hour}点，" + ("早上" if hour<9 else "上午" if hour<12 else "下午" if hour<18 else "晚上")
+    day_info = f"今天是星期{['一','二','三','四','五','六','日'][weekday]}，{'工作日' if weekday<5 else '周末'}。"
+
+    ctx_enriched = context_str.rstrip('}') + f', "time_info": "{time_info}", "day_info": "{day_info}"}}'
+
+    page_topics = {
+        'home':   '攒钱进度、预算提醒，或引导用户来对话页记账（周末问吃了什么/去哪玩，工作日问午饭，晚上问今天过得怎样）',
+        'stats':  '消费数据分析、省钱建议，或聊聊最近的消费习惯',
+        'bills':  '账单趣事、记账习惯，或提醒有漏记的账单',
+        'me':     '攒钱目标鼓励、个人设定建议，或聊聊攒钱的意义',
+    }
+
+    async def _one(page: str):
+        ctx_with_page = ctx_enriched.rstrip('}') + f', "current_page": "{page}"}}'
+        msg = await _mascot_once(ctx_with_page, page_topics[page])
+        print(f"[warmup] {page}: {msg[:50]}")
+        return page, msg
+
+    tasks = [_one(p) for p in ['home', 'stats', 'bills', 'me']]
+    results = await asyncio.gather(*tasks, return_exceptions=True)
+    out = {}
+    for r in results:
+        if isinstance(r, Exception):
+            print(f"[warmup] 异常: {r}")
+        else:
+            out[r[0]] = r[1]
+    print(f"[warmup] 完成: {out}")
+    return out

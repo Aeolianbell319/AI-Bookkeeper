@@ -14,6 +14,7 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     reply: str
     bill_detected: dict | None = None
+    goal_detected: dict | None = None
     goal_progress: dict | None = None
 
 
@@ -84,8 +85,10 @@ class GoalCreateRequest(BaseModel):
 
 class GoalResponse(BaseModel):
     goal: dict | None = None
+    goals: list[dict] | None = None
     message: str | None = None
     progress_text: str | None = None
+    completed_count: int | None = None
 
 
 # ==================== Mascot ====================
